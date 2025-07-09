@@ -11,10 +11,12 @@ export function StatisticsPage() {
   const calculateStatistics = () => {
     if (!history) return null;
 
+    const totalMatches = (history as readonly Match[]).length;
+
     let firstHalfGoals = 0;
     let secondHalfGoals = 0;
     let earliestGoal = Infinity;
-    let latestGoal = 0;
+    let latestGoal = -Infinity;
     const roundGoals: { [key: number]: number } = {};
 
     (history as readonly Match[]).forEach((match) => {
@@ -49,22 +51,33 @@ export function StatisticsPage() {
       goals,
     }));
 
-    const maxGoalsRound = roundEntries.reduce((max, current) =>
-      current.goals > max.goals ? current : max
-    );
+    const maxGoalsRound =
+      roundEntries.length > 0
+        ? roundEntries.reduce((max, current) =>
+            current.goals > max.goals ? current : max
+          )
+        : { round: 0, goals: 0 };
 
-    const minGoalsRound = roundEntries.reduce((min, current) =>
-      current.goals < min.goals ? current : min
-    );
+    const minGoalsRound =
+      roundEntries.length > 0
+        ? roundEntries.reduce((min, current) =>
+            current.goals < min.goals ? current : min
+          )
+        : { round: 0, goals: 0 };
+
+    const totalGoals = firstHalfGoals + secondHalfGoals;
+    const averageGoalsPerMatch =
+      totalMatches > 0 ? totalGoals / totalMatches : 0;
 
     return {
       firstHalfGoals,
       secondHalfGoals,
       earliestGoal: earliestGoal === Infinity ? null : earliestGoal,
-      latestGoal: latestGoal === 0 ? null : latestGoal,
+      latestGoal: latestGoal === -Infinity ? null : latestGoal,
       maxGoalsRound,
       minGoalsRound,
-      totalGoals: firstHalfGoals + secondHalfGoals,
+      totalGoals,
+      averageGoalsPerMatch,
     };
   };
 
@@ -202,23 +215,27 @@ export function StatisticsPage() {
             </div>
             <div className="p-4 bg-gray-50 rounded">
               <div className="text-2xl font-bold">
-                {Math.round((stats.firstHalfGoals / stats.totalGoals) * 100)}%
+                {stats.totalGoals > 0
+                  ? Math.round((stats.firstHalfGoals / stats.totalGoals) * 100)
+                  : 0}
+                %
               </div>
               <div className="text-sm text-gray-600">First Half</div>
             </div>
             <div className="p-4 bg-gray-50 rounded">
               <div className="text-2xl font-bold">
-                {Math.round((stats.secondHalfGoals / stats.totalGoals) * 100)}%
+                {stats.totalGoals > 0
+                  ? Math.round((stats.secondHalfGoals / stats.totalGoals) * 100)
+                  : 0}
+                %
               </div>
               <div className="text-sm text-gray-600">Second Half</div>
             </div>
             <div className="p-4 bg-gray-50 rounded">
               <div className="text-2xl font-bold">
-                {stats.latestGoal && stats.earliestGoal
-                  ? stats.latestGoal - stats.earliestGoal
-                  : 0}
+                {stats.averageGoalsPerMatch.toFixed(2)}
               </div>
-              <div className="text-sm text-gray-600">Minute Range</div>
+              <div className="text-sm text-gray-600">Avg. Goals / Match</div>
             </div>
           </div>
         </CardContent>
