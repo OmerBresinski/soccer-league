@@ -120,7 +120,7 @@ export function TopScorersPage() {
           <CardTitle>Detailed Scorers Table</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] overflow-y-auto relative">
+          <div className="overflow-y-auto relative">
             <Table>
               <TableHeader className="sticky top-0 bg-white">
                 <TableRow>

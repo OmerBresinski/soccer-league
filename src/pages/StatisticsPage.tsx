@@ -81,18 +81,17 @@ export function StatisticsPage() {
   const stats = calculateStatistics();
 
   if (historyLoading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8 w-[900px]">Loading...</div>;
   }
 
   if (!stats) {
-    return <div className="text-center py-8">No data found</div>;
+    return <div className="text-center py-8  w-[900px]">No data found</div>;
   }
 
   return (
     <div className="space-y-6 w-[900px]">
       <h1 className="text-3xl font-bold">General Statistics</h1>
 
-      {/* Goals by Half */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>

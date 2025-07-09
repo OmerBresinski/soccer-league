@@ -44,7 +44,7 @@ export function HistoryPage() {
       : allHistory;
 
   if (historyLoading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8 w-[900px]">Loading...</div>;
   }
 
   return (

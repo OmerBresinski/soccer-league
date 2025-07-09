@@ -16,7 +16,7 @@ function App() {
           <div className="w-[900px] max-w-xs mb-4">
             <div className="w-full flex items-center gap-2">
               <LeagueSelector
-                className="w-full mb-6"
+                className="w-full my-6"
                 selectedLeagueId={leagueId}
                 onLeagueChange={setLeagueId}
               />

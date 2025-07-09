@@ -121,7 +121,7 @@ export function TablesPage() {
           <CardTitle>League Table</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] overflow-y-auto relative w-[900px]">
+          <div className="h-[320px] overflow-y-auto relative w-[900px]">
             <Table>
               <TableHeader className="sticky top-0 bg-white">
                 <TableRow>
