@@ -1,10 +1,11 @@
 import { useLeagueHistory } from "@/api/useLeagueHistory";
+import { useLeague } from "@/contexts/LeagueContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, Clock, TrendingUp, TrendingDown } from "lucide-react";
 import type { Match } from "@/types";
 
 export function StatisticsPage() {
-  const leagueId = 1;
+  const { leagueId } = useLeague();
   const { data: history, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
 

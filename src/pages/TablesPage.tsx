@@ -3,6 +3,7 @@ import { useTeams } from "@/api/useTeams";
 import { useLeagueHistory } from "@/api/useLeagueHistory";
 import { useSquad } from "@/api/useSquad";
 import { useTeamHistory } from "@/api/useTeamHistory";
+import { useLeague } from "@/contexts/LeagueContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -29,19 +30,25 @@ interface TeamStats {
 
 export function TablesPage() {
   const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
-  const leagueId = 1;
+  const { leagueId } = useLeague();
 
   const { data: teams, isLoading: teamsLoading } = useTeams(leagueId);
   const { data: history, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
-  const { data: squad, isLoading: squadLoading } = useSquad({
-    squadId: selectedTeamId || 120,
-    leagueId: leagueId,
-  });
-  const { data: teamHistory, isLoading: teamHistoryLoading } = useTeamHistory({
-    teamId: selectedTeamId || 120,
-    leagueId: leagueId,
-  });
+  const { data: squad, isLoading: squadLoading } = useSquad(
+    {
+      squadId: selectedTeamId,
+      leagueId: leagueId,
+    },
+    { enabled: selectedTeamId !== null }
+  );
+  const { data: teamHistory, isLoading: teamHistoryLoading } = useTeamHistory(
+    {
+      teamId: selectedTeamId,
+      leagueId: leagueId,
+    },
+    { enabled: selectedTeamId !== null }
+  );
 
   const calculateTeamStats = (): TeamStats[] => {
     if (!teams || !history) return [];
@@ -102,11 +109,11 @@ export function TablesPage() {
   const teamStats = calculateTeamStats();
 
   if (teamsLoading || historyLoading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8 w-[900px]">Loading...</div>;
   }
 
   return (
-    <div className="space-y-6 w-full max-w-7xl">
+    <div className="space-y-6 w-[900px]">
       <h1 className="text-3xl font-bold">Rankings</h1>
 
       <Card>

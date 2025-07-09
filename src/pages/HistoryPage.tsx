@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLeagueHistory } from "@/api/useLeagueHistory";
+import { useLeague } from "@/contexts/LeagueContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ export function HistoryPage() {
   const [minRound, setMinRound] = useState<string>("");
   const [maxRound, setMaxRound] = useState<string>("");
   const [filteredRounds, setFilteredRounds] = useState<number[]>([]);
-  const leagueId = 1;
+  const { leagueId } = useLeague();
 
   const { data: allHistory, isLoading: historyLoading } =
     useLeagueHistory(leagueId);

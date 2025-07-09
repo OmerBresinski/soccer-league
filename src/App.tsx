@@ -1,25 +1,30 @@
-import { Routes, Route } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { TablesPage } from "@/pages/TablesPage";
-import { HistoryPage } from "@/pages/HistoryPage";
-import { TopScorersPage } from "@/pages/TopScorersPage";
-import { StatisticsPage } from "@/pages/StatisticsPage";
+import { useLeague } from "./contexts/LeagueContext";
+import { LeagueSelector } from "./components/LeagueSelector";
 import "./App.css";
 
 function App() {
+  const { leagueId, setLeagueId } = useLeague();
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
         <AppSidebar />
-        <main className="flex flex-col items-center w-full">
-          <Routes>
-            <Route path="/" element={<TablesPage />} />
-            <Route path="/tables" element={<TablesPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/top-scorers" element={<TopScorersPage />} />
-            <Route path="/statistics" element={<StatisticsPage />} />
-          </Routes>
+        <main className="flex flex-col items-center w-full p-4">
+          <div className="w-[900px] max-w-xs mb-4">
+            <div className="w-full flex items-center gap-2">
+              <LeagueSelector
+                className="w-full mb-6"
+                selectedLeagueId={leagueId}
+                onLeagueChange={setLeagueId}
+              />
+            </div>
+          </div>
+          <div className="w-full">
+            <Outlet />
+          </div>
         </main>
       </div>
     </SidebarProvider>

@@ -1,4 +1,5 @@
 import { useLeagueHistory } from "@/api/useLeagueHistory";
+import { useLeague } from "@/contexts/LeagueContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -19,7 +20,7 @@ interface TopScorer {
 }
 
 export function TopScorersPage() {
-  const leagueId = 1;
+  const { leagueId } = useLeague();
   const { data: history, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
 
