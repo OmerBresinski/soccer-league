@@ -9,12 +9,11 @@ export function HistoryPage() {
   const [minRound, setMinRound] = useState<string>("");
   const [maxRound, setMaxRound] = useState<string>("");
   const [filteredRounds, setFilteredRounds] = useState<number[]>([]);
-  const leagueId = 1; // Using league ID 1 as specified
+  const leagueId = 1;
 
   const { data: allHistory, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
 
-  // Get unique rounds for filtering
   const availableRounds = allHistory
     ? Array.from(
         new Set((allHistory as readonly Match[]).map((match) => match.round))

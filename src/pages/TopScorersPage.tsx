@@ -19,7 +19,7 @@ interface TopScorer {
 }
 
 export function TopScorersPage() {
-  const leagueId = 1; // Using league ID 1 as specified
+  const leagueId = 1;
   const { data: history, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
 
@@ -45,7 +45,7 @@ export function TopScorersPage() {
 
     return Object.values(scorerStats)
       .sort((a, b) => b.goals - a.goals)
-      .slice(0, 3); // Top 3 scorers
+      .slice(0, 3);
   };
 
   const topScorers = calculateTopScorers();

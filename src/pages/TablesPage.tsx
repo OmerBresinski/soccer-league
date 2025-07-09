@@ -29,7 +29,7 @@ interface TeamStats {
 
 export function TablesPage() {
   const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
-  const leagueId = 1; // Using league ID 1 as specified
+  const leagueId = 1;
 
   const { data: teams, isLoading: teamsLoading } = useTeams(leagueId);
   const { data: history, isLoading: historyLoading } =
@@ -43,7 +43,6 @@ export function TablesPage() {
     leagueId: leagueId,
   });
 
-  // Calculate team statistics
   const calculateTeamStats = (): TeamStats[] => {
     if (!teams || !history) return [];
 

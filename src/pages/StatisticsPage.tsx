@@ -4,7 +4,7 @@ import { BarChart3, Clock, TrendingUp, TrendingDown } from "lucide-react";
 import type { Match } from "@/types";
 
 export function StatisticsPage() {
-  const leagueId = 1; // Using league ID 1 as specified
+  const leagueId = 1;
   const { data: history, isLoading: historyLoading } =
     useLeagueHistory(leagueId);
 
@@ -20,7 +20,6 @@ export function StatisticsPage() {
     const roundGoals: { [key: number]: number } = {};
 
     (history as readonly Match[]).forEach((match) => {
-      // Initialize round goals count
       if (!roundGoals[match.round]) {
         roundGoals[match.round] = 0;
       }
@@ -28,14 +27,12 @@ export function StatisticsPage() {
       match.goals.forEach((goal) => {
         roundGoals[match.round]++;
 
-        // First half vs second half
         if (goal.minute <= 45) {
           firstHalfGoals++;
         } else {
           secondHalfGoals++;
         }
 
-        // Earliest and latest goals
         if (goal.minute < earliestGoal) {
           earliestGoal = goal.minute;
         }
@@ -45,7 +42,6 @@ export function StatisticsPage() {
       });
     });
 
-    // Find rounds with most and least goals
     const roundEntries = Object.entries(roundGoals).map(([round, goals]) => ({
       round: parseInt(round),
       goals,
