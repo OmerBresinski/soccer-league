@@ -13,7 +13,7 @@ export function StatisticsPage() {
 
     let firstHalfGoals = 0;
     let secondHalfGoals = 0;
-    let earliestGoal = 90;
+    let earliestGoal = Infinity;
     let latestGoal = 0;
     const roundGoals: { [key: number]: number } = {};
 
@@ -60,7 +60,7 @@ export function StatisticsPage() {
     return {
       firstHalfGoals,
       secondHalfGoals,
-      earliestGoal: earliestGoal === 90 ? null : earliestGoal,
+      earliestGoal: earliestGoal === Infinity ? null : earliestGoal,
       latestGoal: latestGoal === 0 ? null : latestGoal,
       maxGoalsRound,
       minGoalsRound,
@@ -71,11 +71,11 @@ export function StatisticsPage() {
   const stats = calculateStatistics();
 
   if (historyLoading) {
-    return <div className="text-center py-8">טוען...</div>;
+    return <div className="text-center py-8">Loading...</div>;
   }
 
   if (!stats) {
-    return <div className="text-center py-8">לא נמצאו נתונים</div>;
+    return <div className="text-center py-8">No data found</div>;
   }
 
   return (
@@ -124,13 +124,17 @@ export function StatisticsPage() {
               <div className="flex justify-between items-center p-3 bg-yellow-50 rounded">
                 <span className="font-medium">Earliest Goal</span>
                 <span className="text-2xl font-bold text-yellow-600">
-                  {stats.earliestGoal ? `Min ${stats.earliestGoal}` : "N/A"}
+                  {stats.earliestGoal !== null
+                    ? `Min ${stats.earliestGoal}`
+                    : "N/A"}
                 </span>
               </div>
               <div className="flex justify-between items-center p-3 bg-purple-50 rounded">
                 <span className="font-medium">Latest Goal</span>
                 <span className="text-2xl font-bold text-purple-600">
-                  {stats.latestGoal ? `Min ${stats.latestGoal}` : "N/A"}
+                  {stats.latestGoal !== null
+                    ? `Min ${stats.latestGoal}`
+                    : "N/A"}
                 </span>
               </div>
             </div>
