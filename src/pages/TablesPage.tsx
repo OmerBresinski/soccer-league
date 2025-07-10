@@ -177,7 +177,6 @@ export function TablesPage() {
 
       {selectedTeamId && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Squad */}
           <Card>
             <CardHeader>
               <CardTitle>
@@ -214,7 +213,6 @@ export function TablesPage() {
             </CardContent>
           </Card>
 
-          {/* Team History */}
           <Card>
             <CardHeader>
               <CardTitle>

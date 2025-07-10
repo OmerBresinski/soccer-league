@@ -151,7 +151,6 @@ export function StatisticsPage() {
         </Card>
       </div>
 
-      {/* Round Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -198,7 +197,6 @@ export function StatisticsPage() {
         </Card>
       </div>
 
-      {/* Summary Card */}
       <Card>
         <CardHeader>
           <CardTitle>Statistics Summary</CardTitle>

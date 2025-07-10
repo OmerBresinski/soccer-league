@@ -114,7 +114,6 @@ export function TopScorersPage() {
         </CardContent>
       </Card>
 
-      {/* Detailed Table */}
       <Card>
         <CardHeader>
           <CardTitle>Detailed Scorers Table</CardTitle>

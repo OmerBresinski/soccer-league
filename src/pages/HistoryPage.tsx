@@ -51,7 +51,6 @@ export function HistoryPage() {
     <div className="space-y-6 w-[900px]">
       <h1 className="text-3xl font-bold">Match History</h1>
 
-      {/* Round Filter */}
       <Card>
         <CardHeader>
           <CardTitle>Filter by Rounds</CardTitle>
@@ -96,7 +95,6 @@ export function HistoryPage() {
         </CardContent>
       </Card>
 
-      {/* Matches */}
       <Card>
         <CardHeader>
           <CardTitle>
